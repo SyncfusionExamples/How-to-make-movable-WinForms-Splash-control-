@@ -12,8 +12,6 @@ namespace SplashControlSample
 {
     public partial class Form1 : Form
     {
-        public bool allowSplashMove;
-
         //Determined the cursor point 
         Point cursorPoint = new Point();
 
@@ -21,14 +19,12 @@ namespace SplashControlSample
         {
             InitializeComponent();
             this.splashControl1.SplashControlPanel.MouseDown += SplashControlPanel_MouseDown;
-            this.splashControl1.SplashControlPanel.MouseUp += SplashControlPanel_MouseUp;
             this.splashControl1.SplashControlPanel.MouseMove += SplashControlPanel_MouseMove;
         }
 
         private void SplashControlPanel_MouseMove(object sender, MouseEventArgs e)
         {
-
-            if (allowSplashMove)
+            if (Control.MouseButtons == MouseButtons.Left)
             {
                 if (this.splashControl1.SplashControlPanel.Parent is Form)
                 {
@@ -38,16 +34,9 @@ namespace SplashControlSample
             }
         }
 
-        private void SplashControlPanel_MouseUp(object sender, MouseEventArgs e)
-        {
-            allowSplashMove = false;
-
-        }
         private void SplashControlPanel_MouseDown(object sender, MouseEventArgs e)
         {
-            allowSplashMove = true;
             cursorPoint = e.Location;
         }
     }
 }
-
